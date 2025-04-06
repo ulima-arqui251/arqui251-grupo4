@@ -13,6 +13,3 @@
   - [1.2. Modelo de Negocio](./1/1.2/1.2.md)
   - [1.3. Estructura del Equipo](./1/1.3/1.3.md)
   - [1.4. Listado de Stakeholders](./1/1.4/1.4.md)
-
-
-![](https://i.pinimg.com/originals/44/b6/7d/44b67d5e479d46f672031fb9ee0229cf.gif)
