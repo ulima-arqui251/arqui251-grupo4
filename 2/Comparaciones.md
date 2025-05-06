@@ -1,12 +1,12 @@
 # Decisión 1
 
-## Título:
-
-**Elección entre Base de Datos No Relacional (MongoDB) vs Relacional (PostgreSQL)**
+## Título: **Elección entre Base de Datos No Relacional (MongoDB) vs Relacional (PostgreSQL)**
 
 ### Contexto:
 
-El sistema necesita manejar información estructurada como usuarios, transacciones, y relaciones complejas entre diferentes entidades. Los datos deben cumplir con integridad referencial y propiedades ACID para evitar inconsistencias. Se prevé crecimiento en volumen y necesidad futura de análisis avanzado.
+Desmodus App gestiona entidades con estructura clara y relaciones definidas, como usuarios, registros de especies y ubicaciones geográficas. 
+Aunque podría haber cierta variabilidad en atributos secundarios, el núcleo de los datos responde bien a esquemas estructurados.
+Se anticipa crecimiento en volumen de información y una futura necesidad de realizar consultas complejas y análisis sobre las relaciones entre entidades.
 
 ### Alternativas:
 
@@ -15,19 +15,24 @@ El sistema necesita manejar información estructurada como usuarios, transaccion
 - Alta flexibilidad para esquemas que cambian frecuentemente.
 - Escalabilidad horizontal sencilla.
 - Menor control sobre integridad referencial.
+- Menos eficiente para relaciones complejas entre entidades.
 
 **PostgreSQL (Relacional)**
 
 - Fuerte en integridad de datos y relaciones complejas.
 - Soporte para tipos de datos avanzados (JSON, arrays, etc.).
-- Buen rendimiento en operaciones analíticas.
+- Buen rendimiento en operaciones analíticas estructuradas.
+- Amplio soporte para extensiones como PostGIS, útil para datos geoespaciales.
 
 ### Criterios de Elección:
 
+- Predominancia de datos estructurados y relaciones entre entidades.
 - Consistencia e integridad de datos.
 - Requerimientos de análisis estructurado.
 - Escalabilidad y soporte a largo plazo.
 - Familiaridad del equipo técnico.
+- Integración eficiente con FastAPI mediante ORMs (SQLAlchemy, SQLModel).
+- Compatibilidad con PostGIS para funciones geoespaciales, clave en el mapeo de avistamientos.
 
 ### Decisión:
 
@@ -35,11 +40,11 @@ El sistema necesita manejar información estructurada como usuarios, transaccion
 
 ### Sustento:
 
-PostgreSQL proporciona una solución robusta para garantizar la integridad de datos, soportar relaciones complejas y realizar análisis avanzados. Esto es clave en una arquitectura donde las operaciones financieras y la trazabilidad son críticas.
+PostgreSQL ofrece una solución sólida para modelar datos estructurados y con relaciones claras, que representan la base funcional del sistema. Su integración con FastAPI mediante ORMs facilita el desarrollo backend, mientras que su soporte para extensiones como PostGIS lo vuelve ideal para operaciones geoespaciales necesarias en la localización de especies en mapas. Aunque se valoró la flexibilidad de MongoDB, no existe un requerimiento fuerte de esquemas dinámicos, por lo que priorizar un modelo relacional robusto asegura coherencia, rendimiento en consultas y sostenibilidad a largo plazo.
 
 ---
 
-# Decisión 2
+# Decisión 2 ()
 
 ## Título:
 
@@ -51,7 +56,7 @@ El sistema requiere exponer servicios para frontend y posiblemente integraciones
 
 ### Alternativas:
 
-**gRPC**
+#### gRPC
 
 - Alto rendimiento y soporte para transmisión eficiente de datos binarios.
 - Ideal para comunicaciones internas en microservicios.
@@ -63,7 +68,7 @@ El sistema requiere exponer servicios para frontend y posiblemente integraciones
 - Facilidad de documentación con herramientas como Swagger.
 - Ideal para APIs públicas o expuestas a terceros.
 
-### Criterios de Elección:
+#### Criterios de Elección:
 
 - Facilidad de integración con frontend.
 - Compatibilidad multiplataforma.
@@ -72,7 +77,7 @@ El sistema requiere exponer servicios para frontend y posiblemente integraciones
 
 ### Decisión:
 
-**Se elige REST API.**
+Se elige **REST API**.
 
 ### Sustento:
 
@@ -120,15 +125,15 @@ FastAPI ofrece mayor rendimiento para APIs y facilita la generación automática
 
 ---
 
-# Decisión 4
+# Decisión 4 (Elección de tecnología)
 
-## Título:
-
-**Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android)**
+## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android)**
 
 ### Contexto:
 
-Se necesita desarrollar una app móvil usable tanto en Android como en iOS, manteniendo bajos los costos de desarrollo y mantención. El equipo es reducido y se prioriza lanzar MVP funcional en corto tiempo.
+Se necesita desarrollar una app móvil usable tanto en Android como en iOS, manteniendo bajos los costos de desarrollo y mantención. 
+El equipo es reducido y se prioriza lanzar MVP funcional en corto tiempo. 
+Cabe mencionar que el uso de hardware es crítico para los módulos planteados de la aplicación (e.g. uso de cámara, gps y núcleos del sistema móvil para realizar la inferencia con el mejor rendimiento).
 
 ### Alternativas:
 
@@ -145,10 +150,10 @@ Se necesita desarrollar una app móvil usable tanto en Android como en iOS, mant
 
 ### Criterios de Elección:
 
-- Velocidad de desarrollo.
-- Costo de mantenimiento.
-- Compatibilidad multiplataforma.
-- Experiencia del equipo.
+- **Velocidad de desarrollo**.
+- **Costo** de mantenimiento.
+- Compatibilidad **multiplataforma**.
+- **Experiencia del equipo**.
 
 ### Decisión:
 
@@ -156,7 +161,9 @@ Se necesita desarrollar una app móvil usable tanto en Android como en iOS, mant
 
 ### Sustento:
 
-Flutter permite acelerar el desarrollo con un solo código base para ambas plataformas. Esto reduce costos de mantenimiento y tiempos de entrega, lo cual es crítico para un MVP o producto en etapas tempranas.
+Flutter permite acelerar el desarrollo con un solo código base para ambas plataformas. 
+Esto reduce costos de mantenimiento y tiempos de entrega, lo cual es crítico para un MVP o producto en etapas tempranas. 
+Para el apartado de inferencias en el mismo dispositivo, se cuenta con el apoyo de librerías de código abierto que permiten la interacción del código abstracto de Flutter con código nativo del sistema operativo del ambiente de ejecución (Java para Android y Swift para iOS) por lo que el uso de operaciones de bajo nivel está garantizado gracias a esta funcionalidad de Flutter.
 
 ---
 
@@ -199,46 +206,46 @@ El sistema frontend está enfocado en brindar una interfaz web rica e interactiv
 TypeScript mejora la mantenibilidad y escalabilidad del frontend, especialmente a medida que el equipo crece. Su compatibilidad con librerías modernas lo hace ideal para construir una interfaz sólida y confiable desde el inicio.
 
 ---
-
 # Decisión 6
 
 ## Título:
 
-**Elección entre Azure vs Render para el despliegue y administración de servicios en la nube**
+**Elección entre Azure Web App vs Render para el despliegue y administración de servicios en la nube**
 
 ### Contexto:
 
-El equipo se encuentra desarrollando una aplicación web de tamaño mediano orientada a usuarios finales con requerimientos de alta disponibilidad, despliegue rápido y manejo sencillo. No se cuenta con un DevOps dedicado, por lo cual la facilidad de configuración y mantenimiento es un factor determinante. El presupuesto es limitado, y se busca una solución que permita escalar de forma progresiva sin generar gastos excesivos desde el inicio.
+El equipo se encuentra desarrollando una aplicación web de tamaño mediano orientada a usuarios finales, con requerimientos de alta disponibilidad, despliegue rápido y mantenimiento sencillo. 
+No se cuenta con un perfil DevOps dedicado, por lo que se busca una solución que minimice la complejidad operativa. 
+Además, el presupuesto es limitado, lo que obliga a priorizar opciones que ofrezcan un crecimiento progresivo sin costos elevados en etapas iniciales.
 
 ### Alternativas:
 
-**Azure (Microsoft Azure)**
+**Azure Web App**
 
-- Plataforma empresarial con un ecosistema robusto, altamente escalable y con múltiples servicios integrados (base de datos, funciones serverless, Kubernetes, etc.).
-- Ideal para soluciones complejas, con políticas de seguridad avanzadas y soporte empresarial.
-- Requiere experiencia en configuración y administración de recursos (VNet, permisos, políticas, etc.), lo que puede ser una barrera inicial para equipos pequeños.
+- Servicio gestionado dentro del ecosistema de Azure que permite desplegar aplicaciones web con soporte para runtimes como Python.
+- Ofrece integración con otros servicios de Azure (como Azure Database, Application Insights, etc.).
+- Requiere conocimientos básicos de configuración de entornos en Azure, manejo de App Services, y gestión de recursos mediante Azure Portal o CLI.
+- Los costos pueden escalar rápidamente al agregar recursos adicionales o en entornos productivos.
 
 **Render**
 
-- Plataforma moderna que ofrece despliegue automático desde repositorios (como GitHub), con configuración mínima.
-- Permite crear servicios web, cron jobs, workers, bases de datos y más con una interfaz sencilla.
-- Precios accesibles, con una capa gratuita suficiente para pruebas y pequeños entornos productivos.
-- Excelente documentación y comunidad en crecimiento.
+- Plataforma orientada a desarrolladores que permite desplegar servicios web directamente desde repositorios Git, con mínima configuración.
+- Ofrece servicios integrados como bases de datos, workers, y cron jobs, además de deploys automáticos y certificados SSL sin intervención manual.
+- Presenta un modelo de precios accesible, con una capa gratuita útil para desarrollo y pruebas.
+- La interfaz es simple, con documentación clara y flujos de trabajo compatibles con herramientas modernas como Docker, GitHub Actions, y CI/CD.
 
 ### Criterios de Elección:
 
 - Facilidad de despliegue y configuración sin necesidad de conocimientos avanzados en infraestructura.
 - Escalabilidad progresiva sin grandes costos iniciales.
 - Integración directa con herramientas de desarrollo modernas (GitHub Actions, Docker, CI/CD).
-- Soporte y documentación clara para desarrolladores.
-- Disponibilidad de funcionalidades mínimas necesarias (hosting, bases de datos, certificados SSL automáticos, etc.).
+- Disponibilidad de funcionalidades mínimas necesarias (hosting, bases de datos, certificados SSL automáticos, monitoreo básico).
+- Curva de aprendizaje acorde a un equipo pequeño sin DevOps dedicado.
 
 ### Decisión:
 
-**Se elige Render como la plataforma de nube.**
+Se elige **Render** como la PAAS del servidor.
 
 ### Sustento:
 
-Render permite al equipo concentrarse en el desarrollo sin tener que invertir tiempo en configurar infraestructura compleja. La curva de aprendizaje es baja, y la integración con herramientas modernas permite ciclos de despliegue rápidos y seguros.  
-El costo inicial es menor en comparación con Azure, lo que es ideal para un proyecto en crecimiento.  
-A pesar de que Azure es más robusto para arquitecturas complejas, Render cumple con todos los requisitos actuales del proyecto con menor fricción, y puede escalar conforme se necesite. Además, la automatización del HTTPS, los deploys por Git y el monitoreo básico son suficientes en esta etapa.
+Render responde mejor a las necesidades operativas actuales del equipo al permitir un flujo de despliegue sencillo, automático y sin fricción desde entornos de desarrollo modernos como GitHub. A diferencia de Azure Web App con runtime Python, que requiere una configuración más detallada y mayor familiaridad con su ecosistema, Render minimiza la carga operativa y acelera los ciclos de entrega. Sus capacidades integradas (SSL, base de datos, deploys automáticos) cubren los requisitos actuales sin necesidad de configurar recursos adicionales. Además, su modelo de precios flexible permite escalar el servicio conforme crece el proyecto, sin incurrir en gastos innecesarios durante la etapa inicial de desarrollo.
