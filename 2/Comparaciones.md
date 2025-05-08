@@ -44,7 +44,7 @@ PostgreSQL ofrece una solución sólida para modelar datos estructurados y con r
 
 ---
 
-# Decisión 2 ()
+# Decisión 2
 
 ## Título:
 
@@ -56,7 +56,7 @@ El sistema requiere exponer servicios para frontend y posiblemente integraciones
 
 ### Alternativas:
 
-#### gRPC
+**gRPC**
 
 - Alto rendimiento y soporte para transmisión eficiente de datos binarios.
 - Ideal para comunicaciones internas en microservicios.
@@ -125,7 +125,7 @@ FastAPI ofrece mayor rendimiento para APIs y facilita la generación automática
 
 ---
 
-# Decisión 4 (Elección de tecnología)
+# Decisión 4
 
 ## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android)**
 
@@ -179,7 +179,7 @@ El sistema frontend está enfocado en brindar una interfaz web rica e interactiv
 
 ### Alternativas:
 
-**Python (con frameworks como Brython)**
+**Python**
 
 - Familiar para desarrolladores backend.
 - Limitado en herramientas y ecosistema para frontend moderno.
