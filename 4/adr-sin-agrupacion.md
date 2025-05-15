@@ -1,6 +1,6 @@
 # Decisión 1
 
-## Título: **Elección entre Base de Datos No Relacional (MongoDB) vs Relacional (PostgreSQL)**
+## Título: **Elección entre Base de Datos No Relacional vs Relacional (Modelo de Datos)**
 
 ### Contexto:
 
@@ -10,19 +10,19 @@ Se anticipa crecimiento en volumen de información y una futura necesidad de rea
 
 ### Alternativas:
 
-**MongoDB (No Relacional)**
+**DBMS No Relacional**
 
 - Alta flexibilidad para esquemas que cambian frecuentemente.
 - Escalabilidad horizontal sencilla.
 - Menor control sobre integridad referencial.
 - Menos eficiente para relaciones complejas entre entidades.
 
-**PostgreSQL (Relacional)**
+**DBMS Relacional**
 
 - Fuerte en integridad de datos y relaciones complejas.
-- Soporte para tipos de datos avanzados (JSON, arrays, etc.).
+- Algunas DBMS soportan para tipos de datos avanzados (JSON, arrays, etc.).
 - Buen rendimiento en operaciones analíticas estructuradas.
-- Amplio soporte para extensiones como PostGIS, útil para datos geoespaciales.
+- Amplio soporte para extensiones de datos geoespaciales.
 
 ### Criterios de Elección:
 
@@ -31,22 +31,20 @@ Se anticipa crecimiento en volumen de información y una futura necesidad de rea
 - Requerimientos de análisis estructurado.
 - Escalabilidad y soporte a largo plazo.
 - Familiaridad del equipo técnico.
-- Integración eficiente con FastAPI mediante ORMs (SQLAlchemy, SQLModel).
-- Compatibilidad con PostGIS para funciones geoespaciales, clave en el mapeo de avistamientos.
 
 ### Decisión:
 
-**Se elige PostgreSQL.**
+**Se elige Base de Datos Relacional.**
 
 ### Sustento:
 
-PostgreSQL ofrece una solución sólida para modelar datos estructurados y con relaciones claras, que representan la base funcional del sistema. Su integración con FastAPI mediante ORMs facilita el desarrollo backend, mientras que su soporte para extensiones como PostGIS lo vuelve ideal para operaciones geoespaciales necesarias en la localización de especies en mapas. Aunque se valoró la flexibilidad de MongoDB, no existe un requerimiento fuerte de esquemas dinámicos, por lo que priorizar un modelo relacional robusto asegura coherencia, rendimiento en consultas y sostenibilidad a largo plazo.
+Las DBMS relacionales ofrecen una solución sólida para modelar datos estructurados y con relaciones claras, que representan la base funcional del sistema. Su integración con REST API's mediante el uso de tecnologías como ORMs facilita el desarrollo backend, mientras que su soporte para extensiones como PostGIS lo vuelve ideal para operaciones geoespaciales necesarias en la localización de especies en mapas. Aunque se valoró la flexibilidad de bases de datos no relacionales, no existe un requerimiento fuerte de esquemas dinámicos, por lo que priorizar un modelo relacional robusto asegura coherencia, rendimiento en consultas y sostenibilidad a largo plazo.
 
 ---
 
 # Decisión 2
 
-## Título: **Elección entre REST API y gRPC para la comunicación entre servicios**
+## Título: **Elección entre REST API y gRPC para la comunicación entre servicios (Modelo de Coordinación)**
 
 ### Contexto:
 
@@ -85,7 +83,7 @@ REST es más accesible para desarrolladores frontend y backend. Su amplia adopci
 
 # Decisión 3
 
-## Título: **Elección entre FastAPI y Django como framework backend en Python**
+## Título: **Elección entre FastAPI y Django como framework backend en Python (Elección de Tecnología)**
 
 ### Contexto:
 
@@ -123,7 +121,7 @@ FastAPI ofrece mayor rendimiento para APIs y facilita la generación automática
 
 # Decisión 4
 
-## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android)**
+## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android) (Elección de Tecnología)**
 
 ### Contexto:
 
@@ -165,7 +163,7 @@ Para el apartado de inferencias en el mismo dispositivo, se cuenta con el apoyo 
 
 # Decisión 5
 
-## Título: **Elección entre lenguaje no tipado (Python) vs lenguaje tipado (TypeScript) para frontend**
+## Título: **Elección entre lenguaje no tipado (Python) vs lenguaje tipado (TypeScript) para frontend (Elección de Tecnología)**
 
 ### Contexto:
 
@@ -203,7 +201,7 @@ TypeScript mejora la mantenibilidad y escalabilidad del frontend, especialmente 
 
 # Decisión 6
 
-## Título: **Elección entre Azure Web App vs Render para el despliegue y administración de servicios en la nube**
+## Título: **Elección entre Azure Web App vs Render para el despliegue y administración de servicios en la nube (Elección de Tecnología)**
 
 ### Contexto:
 
