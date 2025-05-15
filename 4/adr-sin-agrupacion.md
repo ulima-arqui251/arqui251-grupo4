@@ -1,28 +1,28 @@
 # Decisión 1
 
-## Título: **Elección entre Base de Datos No Relacional (MongoDB) vs Relacional (PostgreSQL)**
+## Título: **Elección entre Base de Datos No Relacional vs Relacional (Modelo de Datos)**
 
 ### Contexto:
 
-Desmodus App gestiona entidades con estructura clara y relaciones definidas, como usuarios, registros de especies y ubicaciones geográficas. 
+Desmodus App gestiona entidades con estructura clara y relaciones definidas, como usuarios, registros de especies y ubicaciones geográficas.
 Aunque podría haber cierta variabilidad en atributos secundarios, el núcleo de los datos responde bien a esquemas estructurados.
 Se anticipa crecimiento en volumen de información y una futura necesidad de realizar consultas complejas y análisis sobre las relaciones entre entidades.
 
 ### Alternativas:
 
-**MongoDB (No Relacional)**
+**DBMS No Relacional**
 
 - Alta flexibilidad para esquemas que cambian frecuentemente.
 - Escalabilidad horizontal sencilla.
 - Menor control sobre integridad referencial.
 - Menos eficiente para relaciones complejas entre entidades.
 
-**PostgreSQL (Relacional)**
+**DBMS Relacional**
 
 - Fuerte en integridad de datos y relaciones complejas.
-- Soporte para tipos de datos avanzados (JSON, arrays, etc.).
+- Algunas DBMS soportan para tipos de datos avanzados (JSON, arrays, etc.).
 - Buen rendimiento en operaciones analíticas estructuradas.
-- Amplio soporte para extensiones como PostGIS, útil para datos geoespaciales.
+- Amplio soporte para extensiones de datos geoespaciales.
 
 ### Criterios de Elección:
 
@@ -31,24 +31,20 @@ Se anticipa crecimiento en volumen de información y una futura necesidad de rea
 - Requerimientos de análisis estructurado.
 - Escalabilidad y soporte a largo plazo.
 - Familiaridad del equipo técnico.
-- Integración eficiente con FastAPI mediante ORMs (SQLAlchemy, SQLModel).
-- Compatibilidad con PostGIS para funciones geoespaciales, clave en el mapeo de avistamientos.
 
 ### Decisión:
 
-**Se elige PostgreSQL.**
+**Se elige Base de Datos Relacional.**
 
 ### Sustento:
 
-PostgreSQL ofrece una solución sólida para modelar datos estructurados y con relaciones claras, que representan la base funcional del sistema. Su integración con FastAPI mediante ORMs facilita el desarrollo backend, mientras que su soporte para extensiones como PostGIS lo vuelve ideal para operaciones geoespaciales necesarias en la localización de especies en mapas. Aunque se valoró la flexibilidad de MongoDB, no existe un requerimiento fuerte de esquemas dinámicos, por lo que priorizar un modelo relacional robusto asegura coherencia, rendimiento en consultas y sostenibilidad a largo plazo.
+Las DBMS relacionales ofrecen una solución sólida para modelar datos estructurados y con relaciones claras, que representan la base funcional del sistema. Su integración con REST API's mediante el uso de tecnologías como ORMs facilita el desarrollo backend, mientras que su soporte para extensiones como PostGIS lo vuelve ideal para operaciones geoespaciales necesarias en la localización de especies en mapas. Aunque se valoró la flexibilidad de bases de datos no relacionales, no existe un requerimiento fuerte de esquemas dinámicos, por lo que priorizar un modelo relacional robusto asegura coherencia, rendimiento en consultas y sostenibilidad a largo plazo.
 
 ---
 
 # Decisión 2
 
-## Título:
-
-**Elección entre REST API y gRPC para la comunicación entre servicios**
+## Título: **Elección entre REST API y gRPC para la comunicación entre servicios (Modelo de Coordinación)**
 
 ### Contexto:
 
@@ -87,9 +83,7 @@ REST es más accesible para desarrolladores frontend y backend. Su amplia adopci
 
 # Decisión 3
 
-## Título:
-
-**Elección entre FastAPI y Django como framework backend en Python**
+## Título: **Elección entre FastAPI y Django como framework backend en Python (Elección de Tecnología)**
 
 ### Contexto:
 
@@ -127,12 +121,12 @@ FastAPI ofrece mayor rendimiento para APIs y facilita la generación automática
 
 # Decisión 4
 
-## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android)**
+## Título: **Elección entre Lenguaje Multiplataforma (Flutter) vs Lenguaje Nativo (Kotlin para Android) (Elección de Tecnología)**
 
 ### Contexto:
 
-Se necesita desarrollar una app móvil usable tanto en Android como en iOS, manteniendo bajos los costos de desarrollo y mantención. 
-El equipo es reducido y se prioriza lanzar MVP funcional en corto tiempo. 
+Se necesita desarrollar una app móvil usable tanto en Android como en iOS, manteniendo bajos los costos de desarrollo y mantención.
+El equipo es reducido y se prioriza lanzar MVP funcional en corto tiempo.
 Cabe mencionar que el uso de hardware es crítico para los módulos planteados de la aplicación (e.g. uso de cámara, gps y núcleos del sistema móvil para realizar la inferencia con el mejor rendimiento).
 
 ### Alternativas:
@@ -161,17 +155,15 @@ Cabe mencionar que el uso de hardware es crítico para los módulos planteados d
 
 ### Sustento:
 
-Flutter permite acelerar el desarrollo con un solo código base para ambas plataformas. 
-Esto reduce costos de mantenimiento y tiempos de entrega, lo cual es crítico para un MVP o producto en etapas tempranas. 
+Flutter permite acelerar el desarrollo con un solo código base para ambas plataformas.
+Esto reduce costos de mantenimiento y tiempos de entrega, lo cual es crítico para un MVP o producto en etapas tempranas.
 Para el apartado de inferencias en el mismo dispositivo, se cuenta con el apoyo de librerías de código abierto que permiten la interacción del código abstracto de Flutter con código nativo del sistema operativo del ambiente de ejecución (Java para Android y Swift para iOS) por lo que el uso de operaciones de bajo nivel está garantizado gracias a esta funcionalidad de Flutter.
 
 ---
 
 # Decisión 5
 
-## Título:
-
-**Elección entre lenguaje no tipado (Python) vs lenguaje tipado (TypeScript) para frontend**
+## Título: **Elección entre lenguaje no tipado (Python) vs lenguaje tipado (TypeScript) para frontend (Elección de Tecnología)**
 
 ### Contexto:
 
@@ -206,16 +198,15 @@ El sistema frontend está enfocado en brindar una interfaz web rica e interactiv
 TypeScript mejora la mantenibilidad y escalabilidad del frontend, especialmente a medida que el equipo crece. Su compatibilidad con librerías modernas lo hace ideal para construir una interfaz sólida y confiable desde el inicio.
 
 ---
+
 # Decisión 6
 
-## Título:
-
-**Elección entre Azure Web App vs Render para el despliegue y administración de servicios en la nube**
+## Título: **Elección entre Azure Web App vs Render para el despliegue y administración de servicios en la nube (Elección de Tecnología)**
 
 ### Contexto:
 
-El equipo se encuentra desarrollando una aplicación web de tamaño mediano orientada a usuarios finales, con requerimientos de alta disponibilidad, despliegue rápido y mantenimiento sencillo. 
-No se cuenta con un perfil DevOps dedicado, por lo que se busca una solución que minimice la complejidad operativa. 
+El equipo se encuentra desarrollando una aplicación web de tamaño mediano orientada a usuarios finales, con requerimientos de alta disponibilidad, despliegue rápido y mantenimiento sencillo.
+No se cuenta con un perfil DevOps dedicado, por lo que se busca una solución que minimice la complejidad operativa.
 Además, el presupuesto es limitado, lo que obliga a priorizar opciones que ofrezcan un crecimiento progresivo sin costos elevados en etapas iniciales.
 
 ### Alternativas:
