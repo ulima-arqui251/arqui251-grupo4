@@ -100,7 +100,7 @@ Dada la popularidad, múltiples extensiones de DevOps han emergido las cuales ap
 
 _Marcos Ops emergidos de DevOps_
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*nZzawhf862i04hoWzZWAsA.png)
+![](./docs/ops_logos.png)
 
 Nota. Obtenido de Medium. _…Ops: DevOps, MLOps, DevSecOps (Part 1)_ (https://mv-geoffrey-aaron.medium.com/ops-devops-mlops-devsecops-dataops-part-1-713dcb975d1d)
 
@@ -154,7 +154,7 @@ Una vez VS Code haya sido instalado se debe configurar la extensión de Github A
 
 YAML (_YAML Ain't Markup Language_) es un formato legible por humanos para la serialización de datos. Se usa comúnmente en configuración de CI/CD. Es similar a JSON pero más simple y menos verboso.
 
-![](https://www.snaplogic.com/wp-content/uploads/2022/12/Blog-JSON-vs-YAML-examples.png)
+![](./docs/yaml_json_comparison.png)
 
 ### Estructura de YAML
 
