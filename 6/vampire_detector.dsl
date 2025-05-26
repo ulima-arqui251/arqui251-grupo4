@@ -26,11 +26,11 @@ workspace {
         }
 
         vampireApp = softwareSystem "Detector de Vampiros" {
-            description "Sistema que detecta vampiros mediante un modelo YOLOv11 embebido en la app móvil y provee backend para gestión de módulos y autenticación"
+            description "Sistema que detecta vampiros mediante un modelo YOLOv11 embebido en la app móvil, con backend para autenticación, chat, mapas y gestión de detecciones"
 
             mobileApp = container "Aplicación Móvil" {
                 technology "Flutter"
-                description "App Flutter que muestra mapa, noticias, chat, y detección. Se comunica con backend y usa yolo-flutter-app para detección local."
+                description "App que integra detección, chat, mapa y alertas. Usa yolo-flutter-app para ejecutar detección local con el modelo YOLOv11 embebido"
             }
 
             yoloFlutterLib = container "yolo-flutter-app" {
@@ -40,36 +40,50 @@ workspace {
 
             yoloEmbedded = container "YOLOv11 Embedded Model" {
                 technology "YOLOv11 (on-device)"
-                description "Modelo de detección de especies vampíricas embebido en el dispositivo, invocado a través de la librería yolo-flutter-app"
+                description "Modelo embebido y optimizado para detección en el dispositivo móvil"
             }
 
             fastapiServer = container "Backend API" {
-                technology "FastAPI (Python) en Azure"
-                description "Orquestador central que ofrece APIs REST para autenticación, noticias, detección, ubicación, notificaciones y chatbot"
+                technology "FastAPI (Python)"
+                description "API REST que orquesta autenticación, mapa, noticias, detección, notificaciones y chatbot"
             }
 
             database = container "Base de Datos" {
                 technology "PostgreSQL"
-                description "Almacena información de usuarios, detecciones, configuración, historial de chats y alertas"
+                description "Almacena datos de usuarios, ubicaciones, detecciones, alertas, configuraciones y chat"
             }
 
-            # Flujo detección en dispositivo
-            mobileApp -> yoloFlutterLib "Invoca funciones de la librería"
-            yoloFlutterLib -> yoloEmbedded "Ejecuta detección con el modelo YOLOv11"
-            yoloEmbedded -> yoloFlutterLib "Devuelve especies detectadas"
-            yoloFlutterLib -> mobileApp "Retorna resultados a la app"
+            modelTrainingPipeline = container "YOLO Training Pipeline" {
+                technology "Python + Ultralytics + PyTorch"
+                description "Pipeline para entrenamiento y validación del modelo YOLOv11 usando datasets anotados"
+            }
 
-            # Flujo backend
-            mobileApp -> fastapiServer "Solicita inicio de sesión OAuth, noticias, mapa, detecciones y chatbot"
-            fastapiServer -> googleOAuth "Autentica usuarios vía OAuth"
-            fastapiServer -> discordOAuth "Autentica usuarios vía OAuth"
-            fastapiServer -> facebookOAuth "Autentica usuarios vía OAuth"
-            fastapiServer -> openAI "Solicita respuestas para el chatbot"
-            fastapiServer -> osm "Consulta datos de mapa"
-            fastapiServer -> database "Lee y escribe datos de usuarios, chat, detecciones y alertas"
+            trainingDataset = container "Dataset de Entrenamiento" {
+                technology "Imágenes + Anotaciones (YOLO format)"
+                description "Colección de imágenes de vampiros y especies con sus respectivas etiquetas para entrenamiento"
+            }
 
-            # Conexión usuario
-            user -> mobileApp "Usa la app instalada en el dispositivo"
+
+            user -> mobileApp "Usa la app en su dispositivo"
+
+            // Detección en el dispositivo
+            mobileApp -> yoloFlutterLib "Invoca librería para detección"
+            yoloFlutterLib -> yoloEmbedded "Ejecuta detección"
+            yoloEmbedded -> yoloFlutterLib "Retorna resultados"
+            yoloFlutterLib -> mobileApp "Envía resultados detectados"
+
+            // Backend
+            mobileApp -> fastapiServer "Autenticación, detecciones, mapas, chat"
+            fastapiServer -> googleOAuth "OAuth"
+            fastapiServer -> discordOAuth "OAuth"
+            fastapiServer -> facebookOAuth "OAuth"
+            fastapiServer -> openAI "Chatbot"
+            fastapiServer -> osm "Mapas"
+            fastapiServer -> database "CRUD de datos"
+
+            // Entrenamiento del modelo (proceso externo)
+            trainingDataset -> modelTrainingPipeline "Provee datos de entrenamiento"
+            modelTrainingPipeline -> yoloEmbedded "Genera modelo optimizado embebido"
         }
     }
 
@@ -82,26 +96,30 @@ workspace {
             include facebookOAuth
             include openAI
             include osm
-            autolayout lr
             title "Contexto del Sistema - Detector de Vampiros"
-        }
+            autolayout tb 100 50
+        }   
 
         container vampireApp {
             include user
             include mobileApp
+            include modelTrainingPipeline
+            include trainingDataset
             include yoloFlutterLib
             include yoloEmbedded
             include fastapiServer
             include database
+        
+            // Incluyo aquí los contenedores externos en bloque, juntos y consecutivos
             include googleOAuth
             include discordOAuth
             include facebookOAuth
             include openAI
             include osm
-            autolayout lr
-            title "Vista de Contenedores - Detector de Vampiros"
+            
+            title "Vista de Contenedores - Detector de Vampiros (con Entrenamiento)"
+            autolayout lr 100 50
         }
-
         theme default
     }
 }
