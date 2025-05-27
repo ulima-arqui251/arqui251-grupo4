@@ -182,7 +182,7 @@ jobs:
 
 Si se cuenta con una identificación académica, GitHub tiene un plan especial para asociar tu cuenta como estudiante y acceder a herramientas gratuitas para estudiantes como dominios, créditos cloud y servicios premium.
 
-**Figura X**
+**Figura 6**
 
 _Página web de Github Student Developer Pack_
 
@@ -192,9 +192,9 @@ Nota. Obtenido de Github. _GitHub Student Developer Pack_ (https://education.git
 
 ### Código de ejemplo
 
-Repositorio con una aplicación simple (Dart y Python) con pruebas y configuración CI/CD lista para usar.
+Repositorio con una aplicación simple (Vite React Typescript y FastAPI Python) con pruebas y configuración CI/CD lista para usar.
 
-![waa ]()
+![](./docs/repo_devops.png)
 
 ### Uso de GitHub Actions
 
@@ -209,6 +209,100 @@ Se realizará un flujo de trabajo básico de CI usando GitHub Actions, incluyend
 
 Demostración de cómo configurar y ejecutar pruebas unitarias automáticamente dentro del flujo CI.
 
+#### Pruebas con vitest
+
+```ts
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import Hero from "../src/components/Hero";
+import CounterButton from "../src/components/CounterButton";
+import * as counterService from "../src/service/counter.service";
+
+describe("Hero test", () => {
+  it("renders the correct text with the right class", () => {
+    render(<Hero />);
+
+    const element = screen.getByText("DevOps");
+
+    // Verifica que el elemento esté en el documento y tenga la clase correcta
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveClass("gradient-text");
+  });
+});
+
+describe("Button test", () => {
+  it("renders the button with initial counter and increments on click", async () => {
+    // Mock fn getCounter para traer 5
+    vi.spyOn(counterService, "getCounter").mockResolvedValue({ counter: 5 });
+
+    // Mock fn incrementCounter para incrementar a 6
+    vi.spyOn(counterService, "incrementCounter").mockResolvedValue({
+      counter: 6,
+    });
+
+    render(<CounterButton />);
+
+    // Esperar a quitar loading
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+
+    // Esperar al botón con el contador inicial
+    const button = await screen.findByRole("button", { name: /Contador: 5/i });
+    expect(button).toBeInTheDocument();
+
+    // Click al botón para incrementar el contador
+    fireEvent.click(button);
+
+    // Esperar al botón con el contador incrementado
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: /Contador: 6/i })
+      ).toBeInTheDocument()
+    );
+  });
+});
+```
+
+#### Pruebas con pytest
+
+```python
+import pytest
+from unittest.mock import patch, MagicMock
+
+
+@pytest.fixture
+def mock_psycopg2_pool():
+    # Mockear la clase SimpleConnectionPool de psycopg2
+    with patch("psycopg2.pool.SimpleConnectionPool") as mock_pool_cls:
+        # Mockear connection y cursor
+        mock_conn = MagicMock()
+        mock_cursor = MagicMock()
+
+        # Cuando se llame a fetchone, devolver un valor específico
+        # (en este caso, un contador inicial de 0)
+        mock_cursor.fetchone.return_value = (0,)
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+
+        # Configurar el pool y el contexto
+        mock_pool = MagicMock()
+        mock_pool.getconn.return_value = mock_conn
+        mock_pool.getconn.return_value.__enter__.return_value = mock_conn
+
+        mock_pool_cls.return_value = mock_pool
+
+        yield mock_pool
+
+
+# Prueba 1
+def test_get_counter_returns_zero(mock_psycopg2_pool):
+    with mock_psycopg2_pool.getconn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT counter FROM counters LIMIT 1;")
+            row = cur.fetchone()
+
+            assert {"counter": row[0]} == {"counter": 0}
+
+```
+
 ### Ambientes desarrollo, pruebas y producción
 
 Explicación y ejemplo del uso de ambientes separados:
@@ -217,10 +311,18 @@ Explicación y ejemplo del uso de ambientes separados:
 - Pruebas (Test): ambiente de pruebas (similar a producción).
 - Producción (Prod): entorno en producción.
 
+![](./docs/devops_environs.png)
+
 ### Ejecución de pipeline
 
 Muestra del pipeline ejecutándose en GitHub Actions después de un push al repositorio.
 
+![Imagen de pipeline ejecutándose]()
+
 ### Verificación de despliegue
 
 Confirmación de que el código se desplegó correctamente en el entorno destino (aplicación móvil compilada y REST API desplegada en Azure).
+
+![Imagen de despliegue en GH Pages]()
+
+![Imagen de despliegue en Azure WebApp]()
