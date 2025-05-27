@@ -5,26 +5,43 @@ workspace {
             description "Persona que usa el dispositivo móvil para identificar vampiros"
         }
 
-        googleOAuth = softwareSystem "Google OAuth" {
-            description "Proveedor de autenticación externa mediante OAuth 2.0"
+        oauthProviders = softwareSystem "OAuth 2.0 de terceros" {
+            description "Proveedores de autenticación externa mediante OAuth 2.0"
+
+            googleOAuth = container "Google OAuth" {
+                technology "OAuth 2.0"
+                description "Proveedor de autenticación externa mediante OAuth 2.0"
+            }
+
+            discordOAuth = container "Discord OAuth" {
+                technology "OAuth 2.0"
+                description "Proveedor de autenticación externa mediante OAuth 2.0"
+            }
+
+            facebookOAuth = container "Facebook OAuth" {
+                technology "OAuth 2.0"
+                description "Proveedor de autenticación externa mediante OAuth 2.0"
+            }
         }
 
-        discordOAuth = softwareSystem "Discord OAuth" {
-            description "Proveedor de autenticación externa mediante OAuth 2.0"
-        }
-
-        facebookOAuth = softwareSystem "Facebook OAuth" {
-            description "Proveedor de autenticación externa mediante OAuth 2.0"
-        }
-
-        openAI = softwareSystem "OpenAI LLM" {
+        llmProvider = softwareSystem "Proveedor de modelo grande de lenguaje" {
             description "Servicio externo para generación de respuestas del chatbot"
+
+            gptModel = container "gpt-4o-mini" {
+                technology "OpenAI API"
+                description "Modelo de lenguaje para generar respuestas del chatbot"
+            }
         }
 
-        osm = softwareSystem "OpenStreetMap API" {
-            description "Proveedor de mapas y datos geográficos abiertos"
-        }
+        geolocationService = softwareSystem "Geolocation Service" {
+            description "Servicio externo para geolocalización y mapas"
 
+            osmAPI = container "OpenStreetMap API" {
+                technology "OpenStreetMap API"
+                description "Proveedor de mapas y datos geográficos abiertos"
+            }
+        }
+                
         vampireApp = softwareSystem "Detector de Vampiros" {
             description "Sistema que detecta vampiros mediante un modelo YOLOv11 embebido en la app móvil, con backend para autenticación, chat, mapas y gestión de detecciones"
 
@@ -39,13 +56,38 @@ workspace {
             }
 
             yoloEmbedded = container "YOLOv11 Embedded Model" {
-                technology "YOLOv11 (on-device)"
+                technology "YOLOv11n (on-device)"
                 description "Modelo embebido y optimizado para detección en el dispositivo móvil"
             }
 
             fastapiServer = container "Backend API" {
                 technology "FastAPI (Python)"
                 description "API REST que orquesta autenticación, mapa, noticias, detección, notificaciones y chatbot"
+
+                userController = component "UserController" {
+                    technology "FastAPI Controller"
+                    description "Maneja operaciones relacionadas con el usuario (perfil, configuración, etc.)"
+                }
+
+                authController = component "AuthController" {
+                    technology "FastAPI Controller"
+                    description "Gestiona autenticación OAuth y generación de tokens"
+                }
+
+                noticiasController = component "NoticiasController" {
+                    technology "FastAPI Controller"
+                    description "Proporciona acceso a noticias sobre vampiros y eventos relacionados"
+                }
+
+                chatbotController = component "ChatbotController" {
+                    technology "FastAPI Controller"
+                    description "Orquesta las solicitudes al modelo LLM para generar respuestas del chatbot"
+                }
+
+                reportesController = component "ReportesController" {
+                    technology "FastAPI Controller"
+                    description "Maneja la recepción y consulta de reportes de vampiros detectados"
+                }
             }
 
             database = container "Base de Datos" {
@@ -72,13 +114,36 @@ workspace {
             yoloEmbedded -> yoloFlutterLib "Retorna resultados"
             yoloFlutterLib -> mobileApp "Envía resultados detectados"
 
-            // Backend
+            // Backend (Contenedores)
             mobileApp -> fastapiServer "Autenticación, detecciones, mapas, chat"
+
             fastapiServer -> googleOAuth "OAuth"
             fastapiServer -> discordOAuth "OAuth"
             fastapiServer -> facebookOAuth "OAuth"
-            fastapiServer -> openAI "Chatbot"
-            fastapiServer -> osm "Mapas"
+
+            fastapiServer -> gptModel "Chatbot"
+            fastapiServer -> osmAPI "Mapas"
+
+            // Backend (Componentes)
+            mobileApp -> userController "Consulta perfil, preferencias, etc."
+            mobileApp -> authController "Realiza login mediante OAuth"
+            mobileApp -> noticiasController "Consulta noticias y alertas"
+            mobileApp -> chatbotController "Envía mensajes para respuesta del LLM"
+            mobileApp -> reportesController "Envía y consulta reportes de vampiros"
+
+            authController -> googleOAuth "OAuth"
+            authController -> discordOAuth "OAuth"
+            authController -> facebookOAuth "OAuth"
+
+            chatbotController -> gptModel "Solicita generación de respuesta"
+
+            userController -> database "Lee/Escribe datos de usuario"
+            reportesController -> database "Lee/Escribe reportes"
+            noticiasController -> database "Lee noticias"
+
+            reportesController -> osmAPI "Solicita datos de ubicación (opcional)"
+
+
             fastapiServer -> database "CRUD de datos"
 
             // Entrenamiento del modelo (proceso externo)
@@ -88,20 +153,44 @@ workspace {
     }
 
     views {
+        styles {
+            element "Person" {
+                background #66aa66
+                shape person
+            }
+
+            element "Software System" {
+                background #66bb88
+            }
+
+            element "Container" {
+                background #88bb99
+            }
+            
+            element "Component" {
+                background #99ccaa
+            }
+        }
+
         systemContext vampireApp {
             include user
+
             include vampireApp
-            include googleOAuth
-            include discordOAuth
-            include facebookOAuth
-            include openAI
-            include osm
+
+            include oauthProviders
+            include llmProvider
+            include geolocationService
+
             title "Contexto del Sistema - Detector de Vampiros"
             autolayout tb 100 50
+
+
         }   
 
         container vampireApp {
             include user
+            
+            // Contenedores del sistema
             include mobileApp
             include modelTrainingPipeline
             include trainingDataset
@@ -110,16 +199,47 @@ workspace {
             include fastapiServer
             include database
         
-            // Incluyo aquí los contenedores externos en bloque, juntos y consecutivos
+            // Contenedores externos
             include googleOAuth
             include discordOAuth
             include facebookOAuth
-            include openAI
-            include osm
+
+            include gptModel
+
+            include osmAPI
             
             title "Vista de Contenedores - Detector de Vampiros (con Entrenamiento)"
-            autolayout lr 100 50
+            autolayout tb 200 50
+
         }
+        
+
+        component fastapiServer {
+            include user
+            
+            // Contenedores
+            include mobileApp
+            include database
+            include googleOAuth
+            include discordOAuth
+            include facebookOAuth
+            include gptModel
+            include osmAPI
+
+            // Componentes del server backend
+            include userController
+            include authController
+            include noticiasController
+            include chatbotController
+            include reportesController
+
+
+
+            title "Vista de Componentes - Backend FastAPI"
+            autolayout tb 150 50
+        }
+
         theme default
+
     }
 }
