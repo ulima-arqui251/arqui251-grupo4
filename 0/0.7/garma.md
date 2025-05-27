@@ -106,31 +106,34 @@ Dentro de un servicio backend, el middleware es una función o componente interm
 
 ```pgsql
 project/
-├── src/
-│   ├── controllers/           # Lógica de controladores para manejar requests/responses
-│   │   └── userController.js
-│   │
-│   ├── services/              # Servicios para interactuar con Firestore (lógica de negocio y BD)
-│   │   └── userService.js
-│   │
-│   ├── routes/                # Definición de rutas Express
-│   │   └── userRoutes.js
-│   │
-│   ├── middleware/            # Middlewares Express (ej. autenticación, cifrado, validaciones)
-│   │   └── rsaMiddleware.js
-│   │   └── aesMiddleware.js
-│   │
-│   ├── utils/                 # Utilidades generales (ej. cifrado, validaciones, helpers)
-│   │   └── cryptoUtils.js
-│   │
-│   └── config/                # Configuraciones (Firebase, variables de entorno, etc.)
-│       └── firebaseConfig.js
-│   
-├── app.js                 # Inicialización del servidor Express y middlewares globales
+├── node_modules
+├── src
+|   ├── config
+|   │   └── firebaseConfig.js
+|   ├── controllers
+|   │   └── userController.js
+|   ├── middleware
+|   │   ├── aesMiddleware.js
+│   │   └── rsaMiddleware.js
+│   ├── routes
+│   │   └── userRoutes.js
+│   ├── services
+│   │   └── userService.js
+│   └── utils
+│       ├── aesUtils
+│       │   ├── decrypt.js
+│       │   └── encrypt.js
+|       └── rsaUtils
+│           ├── decrypt.js
+│           └── encrypt.js
+├── app.js
+├── index.js                   
 ├── .env                       # Variables de entorno
+├── .env.example               # Variables de entorno ejemplo plantilla
+├── .gitignore                 
 ├── package.json
-├── serviceAccountKey.json     # Firebase credentials (no subir a repo público)
-└── README.md
+├── package-lock.json
+└── Readme.md
 
 ```
 
