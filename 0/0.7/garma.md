@@ -37,7 +37,7 @@ Existen dos tipos de cifrados:
 #### Cifrados Simetricos
 
 * DES: Proviene de la sigla "estandar de cifrado de datos". Es un algoritmo de cifrado simétrico que se encuentra obsoleto. Es vulnerable a los ataques de fuerza bruta debido a tener una clave relativamente corta (56 bits).
-* Triple DES (3DES): Proviene de la sigla de "estandar de cifrado triple de datos". Aplica el algoritmo DES tres veces a cada bloque de datos, aumentando significativamente la longitud de la clave y reforzando la seguridad. A pesar de presentar mejoras en cuanto a la seguidad, en comparación a su predecesor DES, algunos consideran que está descontinuada y otros que no. Sin embargo, se coincide de que el algoritmo AES lo está desplanzando en gran medida.
+* Triple DES (3DES): Proviene de la sigla de "estandar de cifrado triple de datos". Aplica el algoritmo DES tres veces a cada bloque de datos, aumentando significativamente la longitud de la clave y reforzando la seguridad. A pesar de presentar mejoras en cuanto a la seguridad, en comparación a su predecesor DES, algunos consideran que está descontinuada y otros que no. Sin embargo, se coincide de que el algoritmo AES lo está desplazando en gran medida.
 * AES: Proviene de las siglas "Advanced Encryption Standard". Algunos lo consideran como el estándar de referencia para el cifrado de datos. Cifra los datos en grandes bloques de 128 bits y dispone de claves de distintos tamaños. Además, cada clave pasa por distintas rondas de cifrado (el proceso de codificación y descodificación) para brindar mayor seguridad. En AES-128, una clave de 128 bits, pasa por 10 rondas. AES-192 una clave de 192 bits, pasa por 12 rondas. Finalmente, AES-256, una clave de 256 bits, pasa 14 rondas.
 
 #### Cifrados Asimetricos
