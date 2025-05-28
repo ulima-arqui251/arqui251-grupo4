@@ -194,7 +194,7 @@ Nota. Obtenido de Github. _GitHub Student Developer Pack_ (https://education.git
 
 Repositorio con una aplicación simple (Vite React Typescript y FastAPI Python) con pruebas y configuración CI/CD lista para usar.
 
-![](./docs/repo_devops.png)
+[![](./docs/repo_devops.png)](https://github.com/JesuFrancesco/arqsoft-lab-devops)
 
 Nota. Enlace al repositorio (https://github.com/JesuFrancesco/arqsoft-lab-devops)
 
