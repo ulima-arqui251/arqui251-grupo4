@@ -84,7 +84,7 @@ Para instalar el NodeJs debe seguirse los siguientes pasos:
 
 * express
 * body-parser
-* firebase-admin (para Firestore, pero puede ser cualquier librería para el manejo de su de base de datos)
+* firebase (para Firestore, pero puede ser cualquier librería para el manejo de su de base de datos)
 * crypto
 * dotenv (para poder acceder a las variables de entorno)
 
@@ -148,6 +148,9 @@ Explicación y ejemplo de la creación y llamada de un usuario con información 
 ### Código de ejemplo
 
 Repositorio con una aplicación Backend simple para el registro y llamada de usuario con Node.js (Express) y Firestore.
+
+[Video Presentación](../0.8/garma.md)
+[Código DEMO](../0.8/demo-ggarma)
 
 ## **Bibliografía**
 
