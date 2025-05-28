@@ -10,7 +10,7 @@ Según la página web de Kaspersky, el cifrado de datos se define como la conver
 
 ### ¿Cómo funciona el Cifrado de Datos?
 
-El cifrado de datos tiene la función de convertir los datos de algo legible a no legible. Tiene la finalidad de proteger la confidencialidad de la información, para que personas no autorizadas puedan visualizar datos sensibles. También, puede lograr proteger la integidad de la información, ya que hay ocasiones en el cual se utiliza encriptamiento, como hashes o firmas digitales, para asegurar que no se ha realizado alguna modificación no autorizada de los datos.
+El cifrado de datos tiene la función de convertir los datos de algo legible a no legible. Tiene la finalidad de proteger la confidencialidad de la información, para que personas no autorizadasn no puedan visualizar datos sensibles. También, puede lograr proteger la integridad de la información, ya que hay ocasiones en el cual se utiliza encriptamiento, como hashes o firmas digitales, para asegurar que no se ha realizado alguna modificación no autorizada de los datos.
 
 ### Tipos de Cifrado
 
