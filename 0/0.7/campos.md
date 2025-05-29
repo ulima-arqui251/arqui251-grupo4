@@ -168,10 +168,9 @@ cd weather-dashboard
 npm install
 ```
 
-### **Librerías necesarias (solo las esenciales)**
+### **Librerías utilizadas**
 ```bash
-# Dependencias principales
-npm install lucide-react            # Iconos modernos para React
+npm install lucide-react           
 
 ```
 
@@ -179,7 +178,7 @@ npm install lucide-react            # Iconos modernos para React
 
 ### **WeatherAPI - Configuración**
 * **URL de registro**: https://www.weatherapi.com/
-* **Plan gratuito**: 1,000,000 llamadas/mes (muy generoso)
+* **Plan gratuito**: 1,000,000 llamadas/mes
 * **Datos disponibles**: clima actual, pronóstico hasta 10 días, calidad del aire
 * **Formato**: JSON
 * **Autenticación**: API Key en query parameters
