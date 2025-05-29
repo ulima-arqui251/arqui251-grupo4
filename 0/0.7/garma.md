@@ -10,7 +10,7 @@ Según la página web de Kaspersky, el cifrado de datos se define como la conver
 
 ### ¿Cómo funciona el Cifrado de Datos?
 
-El cifrado de datos tiene la función de convertir los datos de algo legible a no legible. Tiene la finalidad de proteger la confidencialidad de la información, para que personas no autorizadas puedan visualizar datos sensibles. También, puede lograr proteger la integidad de la información, ya que hay ocasiones en el cual se utiliza encriptamiento, como hashes o firmas digitales, para asegurar que no se ha realizado alguna modificación no autorizada de los datos.
+El cifrado de datos tiene la función de convertir los datos de algo legible a no legible. Tiene la finalidad de proteger la confidencialidad de la información, para que personas no autorizadasn no puedan visualizar datos sensibles. También, puede lograr proteger la integridad de la información, ya que hay ocasiones en el cual se utiliza encriptamiento, como hashes o firmas digitales, para asegurar que no se ha realizado alguna modificación no autorizada de los datos.
 
 ### Tipos de Cifrado
 
@@ -84,7 +84,7 @@ Para instalar el NodeJs debe seguirse los siguientes pasos:
 
 * express
 * body-parser
-* firebase-admin (para Firestore, pero puede ser cualquier librería para el manejo de su de base de datos)
+* firebase (para Firestore, pero puede ser cualquier librería para el manejo de su de base de datos)
 * crypto
 * dotenv (para poder acceder a las variables de entorno)
 
@@ -148,6 +148,9 @@ Explicación y ejemplo de la creación y llamada de un usuario con información 
 ### Código de ejemplo
 
 Repositorio con una aplicación Backend simple para el registro y llamada de usuario con Node.js (Express) y Firestore.
+
+[Video Presentación](../0.8/garma.md)
+[Código DEMO](../0.8/demo-ggarma)
 
 ## **Bibliografía**
 
