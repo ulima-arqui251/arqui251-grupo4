@@ -145,9 +145,7 @@ La integración con APIs de terceros se refiere al proceso de conectar una aplic
 ## **Conocimientos previos necesarios**
 * Fundamentos de **React** y **JavaScript ES6+**: hooks (useState, useEffect), componentes funcionales, manejo de estado
 * Conceptos básicos de **APIs REST**: métodos HTTP (GET), estructura JSON y manejo de respuestas
-* **CSS básico**: conocimiento de Flexbox y Grid
-* Manejo de **promesas y async/await** para operaciones asíncronas
-* Conceptos de **geolocalización** y API del navegador
+* Manejo de promesas y async/await para operaciones asíncronas
 * Manejo básico de **errores HTTP** y estados de carga
 * Uso básico de la **terminal/consola** de comandos
 
@@ -175,9 +173,6 @@ npm install
 # Dependencias principales
 npm install lucide-react            # Iconos modernos para React
 
-# TailwindCSS para estilos (opcional pero recomendado)
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
 ```
 
 ## **API de terceros: WeatherAPI**
@@ -204,35 +199,38 @@ GET https://api.weatherapi.com/v1/forecast.json?key={API_KEY}&q={city}&days=3&aq
 ```
 weather-dashboard/
 ├── public/
-│   ├── vite.svg
-│   └── favicon.ico
+│   └── vite.svg
 ├── src/
 │   ├── components/
-│   │   ├── WeatherCard.jsx
-│   │   ├── SearchBar.jsx
-│   │   ├── ForecastCard.jsx
-│   │   ├── LoadingSpinner.jsx
-│   │   └── ErrorMessage.jsx
-│   ├── services/
-│   │   ├── weatherAPI.js
-│   │   └── geolocationService.js
+│   │   ├── LoadingSpinner/
+│   │   │   ├── LoadingSpinner.jsx
+│   │   │   └── LoadingSpinner.css
+│   │   ├── ErrorMessage/
+│   │   │   ├── ErrorMessage.jsx
+│   │   │   └── ErrorMessage.css
+│   │   ├── SearchBar/
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── SearchBar.css
+│   │   ├── ForecastCard/
+│   │   │   ├── ForecastCard.jsx
+│   │   │   └── ForecastCard.css
+│   │   └── WeatherCard/
+│   │       ├── WeatherCard.jsx
+│   │       └── WeatherCard.css
 │   ├── hooks/
 │   │   ├── useWeather.js
 │   │   └── useGeolocation.js
-│   ├── utils/
-│   │   ├── weatherIcons.js
-│   │   ├── formatters.js
-│   │   └── constants.js
 │   ├── App.jsx
+│   ├── App.css
 │   ├── main.jsx
 │   └── index.css
-├── .env.example
 ├── .env
 ├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
 ├── package.json
 ├── README.md
-├── tailwind.config.js
-├── postcss.config.js
 └── vite.config.js
 ```
 
