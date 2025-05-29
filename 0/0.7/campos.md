@@ -133,8 +133,7 @@ La integración con APIs de terceros se refiere al proceso de conectar una aplic
 
 5. **Problemas de rendimiento:** Dependiendo de factores como la latencia de red y la capacidad de respuesta de los servidores del proveedor de la API, integrar APIs de terceros puede introducir cuellos de botella de rendimiento, impactando la velocidad general y capacidad de respuesta de su aplicación.
 
-## Consideraciones técnicas
-# Consideraciones Técnicas - Dashboard del Clima (Demo Simplificada)
+# Consideraciones Técnicas - Dashboard del Clima en React
 
 ## **Requisitos técnicos mínimos**
 * **SO**: Windows, macOS o Linux
