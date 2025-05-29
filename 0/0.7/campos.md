@@ -134,8 +134,145 @@ La integración con APIs de terceros se refiere al proceso de conectar una aplic
 5. **Problemas de rendimiento:** Dependiendo de factores como la latencia de red y la capacidad de respuesta de los servidores del proveedor de la API, integrar APIs de terceros puede introducir cuellos de botella de rendimiento, impactando la velocidad general y capacidad de respuesta de su aplicación.
 
 ## Consideraciones técnicas
+# Consideraciones Técnicas - Dashboard del Clima (Demo Simplificada)
+
+## **Requisitos técnicos mínimos**
+* **SO**: Windows, macOS o Linux
+* **RAM**: mínimo 4 GB
+* **CPU**: procesador moderno
+* **Conexión a Internet**: estable para consultas de API en tiempo real
+* **Navegador**: Chrome, Firefox, Safari o Edge (versiones actualizadas)
+
+## **Conocimientos previos necesarios**
+* Fundamentos de **React** y **JavaScript ES6+**: hooks (useState, useEffect), componentes funcionales, manejo de estado
+* Conceptos básicos de **APIs REST**: métodos HTTP (GET), estructura JSON y manejo de respuestas
+* **CSS básico**: conocimiento de Flexbox y Grid
+* Manejo de **promesas y async/await** para operaciones asíncronas
+* Conceptos de **geolocalización** y API del navegador
+* Manejo básico de **errores HTTP** y estados de carga
+* Uso básico de la **terminal/consola** de comandos
+
+## **Instalación de herramientas**
+
+### **Node.js y npm**
+* Descargar desde https://nodejs.org/
+* Versión recomendada: Node.js 18.x o superior
+* Verificar instalación: `node --version` y `npm --version`
+
+### **IDE Visual Studio Code**
+* Descargar desde https://code.visualstudio.com/
+
+## **Configuración del proyecto**
+
+### **Inicialización con Vite**
+```bash
+npm create vite@latest weather-dashboard -- --template react
+cd weather-dashboard
+npm install
+```
+
+### **Librerías necesarias (solo las esenciales)**
+```bash
+# Dependencias principales
+npm install lucide-react            # Iconos modernos para React
+
+# TailwindCSS para estilos (opcional pero recomendado)
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+## **API de terceros: WeatherAPI**
+
+### **WeatherAPI - Configuración**
+* **URL de registro**: https://www.weatherapi.com/
+* **Plan gratuito**: 1,000,000 llamadas/mes (muy generoso)
+* **Datos disponibles**: clima actual, pronóstico hasta 10 días, calidad del aire
+* **Formato**: JSON
+* **Autenticación**: API Key en query parameters
+
+### **Endpoints utilizados**
+```javascript
+// Clima actual
+GET https://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=yes&lang=es
+
+// Pronóstico
+GET https://api.weatherapi.com/v1/forecast.json?key={API_KEY}&q={city}&days=3&aqi=no&alerts=no&lang=es
+```
+
+## **Arquitectura del proyecto**
+
+### **Estructura de carpetas**
+```
+weather-dashboard/
+├── public/
+│   ├── vite.svg
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── WeatherCard.jsx
+│   │   ├── SearchBar.jsx
+│   │   ├── ForecastCard.jsx
+│   │   ├── LoadingSpinner.jsx
+│   │   └── ErrorMessage.jsx
+│   ├── services/
+│   │   ├── weatherAPI.js
+│   │   └── geolocationService.js
+│   ├── hooks/
+│   │   ├── useWeather.js
+│   │   └── useGeolocation.js
+│   ├── utils/
+│   │   ├── weatherIcons.js
+│   │   ├── formatters.js
+│   │   └── constants.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env.example
+├── .env
+├── .gitignore
+├── package.json
+├── README.md
+├── tailwind.config.js
+├── postcss.config.js
+└── vite.config.js
+```
+
+## **Configuración de variables de entorno**
+
+### **Archivo .env**
+```
+VITE_WEATHER_API_KEY=tu_api_key_de_weatherapi_aqui
+```
+
+## **Buenas prácticas esenciales**
+
+### **Manejo de API Keys**
+* **NO** incluir API keys directamente en el código fuente
+* Utilizar variables de entorno con prefijo `VITE_` para Vite
+* Añadir `.env` al archivo `.gitignore`
+
+### **Manejo de errores básico**
+* Implementar **try-catch** en todas las llamadas a APIs
+* Mostrar mensajes de error simples al usuario
+* Estados de carga para mejor UX
+
+## **Funcionalidades implementadas**
+
+### **Features principales**
+1. **Búsqueda por ciudad** 
+2. **Geolocalización automática** del usuario
+3. **Clima actual** con detalles meteorológicos básicos
+4. **Pronóstico de 3 días**
+5. **Manejo de errores** y estados de carga
+
+### **Datos mostrados**
+* Temperatura actual y sensación térmica
+* Condición climática con iconos (usando Lucide React)
+* Humedad, viento, visibilidad
+* Presión atmosférica e índice UV
+* Pronóstico con temperaturas máximas/mínimas
 
 ## Bibliografía
 
-* ¿Qué es una API (interfaz de programación de aplicaciones)? <hhttps://www.sap.com/latinamerica/products/technology-platform/integration-suite/what-is-api.html>
+* ¿Qué es una API (interfaz de programación de aplicaciones)? <https://www.sap.com/latinamerica/products/technology-platform/integration-suite/what-is-api.html>
 * What are the pros and cons of using third-party APIs? (2024, abril 22). <https://cyclr.com/blog/what-are-the-pros-and-cons-of-using-third-party-apis>
