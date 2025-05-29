@@ -220,4 +220,4 @@ Realizar pruebas de integración con autenticación simulada mediante Postman, v
 Este backend básico en Node.js y Express permite realizar operaciones CRUD sobre usuarios, incluyendo un flujo simulado de autenticación mediante token.
 
 [Video Presentación](../0.8/lujan.md)
-[Código DEMO](../0.8/demo-lujan)
+[Código DEMO](../0.8/demo_lujan)
