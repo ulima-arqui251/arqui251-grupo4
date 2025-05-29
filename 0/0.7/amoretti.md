@@ -194,7 +194,9 @@ Nota. Obtenido de Github. _GitHub Student Developer Pack_ (https://education.git
 
 Repositorio con una aplicación simple (Vite React Typescript y FastAPI Python) con pruebas y configuración CI/CD lista para usar.
 
-![](./docs/repo_devops.png)
+[![](./docs/repo_devops.png)](https://github.com/JesuFrancesco/arqsoft-lab-devops)
+
+Nota. Enlace al repositorio (https://github.com/JesuFrancesco/arqsoft-lab-devops)
 
 ### Uso de GitHub Actions
 
@@ -203,11 +205,11 @@ Se realizará un flujo de trabajo básico de CI usando GitHub Actions, incluyend
 - Checkout del repositorio.
 - Instalación de dependencias.
 - Ejecución de pruebas.
-- Despliegue a entornos.
+- Despliegue a entorno de producción.
 
 ### Pruebas automatizadas
 
-Demostración de cómo configurar y ejecutar pruebas unitarias automáticamente dentro del flujo CI.
+Se pueden apreciar las pruebas unitarias del código de ejemplo.
 
 #### Pruebas con vitest
 
@@ -317,12 +319,16 @@ Explicación y ejemplo del uso de ambientes separados:
 
 Muestra del pipeline ejecutándose en GitHub Actions después de un push al repositorio.
 
-![Imagen de pipeline ejecutándose]()
+![Imagen de workflows de GH Actions](./docs/workflows.png)
+
+![Imagen de pipeline front ejecutándose](./docs/ci_front.png)
+
+![Imagen de pipeline back ejecutándose](./docs/ci_back.png)
 
 ### Verificación de despliegue
 
 Confirmación de que el código se desplegó correctamente en el entorno destino (aplicación móvil compilada y REST API desplegada en Azure).
 
-![Imagen de despliegue en GH Pages]()
+![Imagen de despliegue en GH Pages](./docs/deploy_gh_pages.png)
 
-![Imagen de despliegue en Azure WebApp]()
+![Imagen de despliegue en Azure WebApp](./docs/deploy_azure.png)
