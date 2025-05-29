@@ -192,7 +192,7 @@ Realizar pruebas de integración con autenticación simulada mediante Postman, v
 * Ruta: PUT /users/:id
 * Actualiza un usuario completo (requiere token válido).
 
-![](./docs/edit_user.png)
+![](./docs/edit_user.PNG)
 
 ### Actualizar usuario parcialmente
 
@@ -206,7 +206,7 @@ Realizar pruebas de integración con autenticación simulada mediante Postman, v
 * Ruta: DELETE /users/:id
 * Elimina un usuario según id (requiere token válido).
 
-![](./docs/delete_user.png)
+![](./docs/delete_user.PNG)
 
 ### Consultar métodos permitido
 
