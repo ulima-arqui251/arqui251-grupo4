@@ -1,12 +1,7 @@
-// src/App.jsx
 import { useState, useEffect } from 'react';
 import './App.css';
-
-// Hooks
 import useWeather from './hooks/useWeather';
 import useGeolocation from './hooks/useGeolocation';
-
-// Componentes
 import SearchBar from './components/SearchBar/SearchBar';
 import WeatherCard from './components/WeatherCard/WeatherCard';
 import ForecastCard from './components/ForecastCard/ForecastCard';

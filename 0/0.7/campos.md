@@ -268,6 +268,9 @@ VITE_WEATHER_API_KEY=tu_api_key_de_weatherapi_aqui
 * Presión atmosférica e índice UV
 * Pronóstico con temperaturas máximas/mínimas
 
+[Video Presentación](../0.8/campos.md)
+[Código DEMO](../0.8/weather-dashboard/)
+
 ## Bibliografía
 
 * ¿Qué es una API (interfaz de programación de aplicaciones)? <https://www.sap.com/latinamerica/products/technology-platform/integration-suite/what-is-api.html>
