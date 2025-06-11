@@ -2,21 +2,23 @@
 
 ![Banner SAGA](https://media.geeksforgeeks.org/wp-content/uploads/20241108164412754920/saga-design-patterns_.webp)
 
+Nota. Obtenido de [GeeksForGeeks, s.f.](https://www.geeksforgeeks.org/saga-design-pattern/)
+
 ## Problema
 
-En arquitecturas basadas en microservicios, las transacciones distribuidas son un gran desafío.
-
-Tradicionalmente, una transacción se ejecuta de manera atómica, consistente, aislada y duradera (ACID), pero cuando una operación involucra múltiples servicios independientes, mantener estas propiedades se vuelve complejo.
+En arquitecturas basadas en microservicios, las transacciones distribuidas son un gran desafío. Tradicionalmente, una transacción se ejecuta de manera atómica, consistente, aislada y duradera (ACID), pero cuando una operación involucra múltiples servicios independientes, mantener estas propiedades se vuelve complejo.
 
 El patrón **Saga** surge como una solución ante el problema de **gestionar la consistencia de datos distribuidos** sin depender de un gestor de transacciones centralizado, el cual no escala bien en ambientes cloud-native y desacoplados.
 
-En resumen, el problema que aborda es:
+La lista de problemas que aborda contiene, pero no se limita a:
 
 - **Falta de soporte para transacciones distribuidas ACID** entre microservicios.
 - **Necesidad de garantizar consistencia eventual** en entornos desacoplados.
 - **Complejidad en el manejo de fallos parciales**, donde un servicio puede fallar sin impactar toda la operación global.
 
 ![ACID compliance](https://www.databricks.com/sites/default/files/inline-images/delta-lake-1-min.png?v=1702063468)
+
+Nota. Obtenido de DataBricks, s.f.
 
 ## Solución
 
@@ -31,6 +33,8 @@ Existen dos variantes principales:
 ![Ejemplo SAGA coreografía](https://www.ingenierobinario.com/wp-content/uploads/2023/12/patron_choreography.svg)
 
 ![Ejemplo SAGA orquestada](https://www.ingenierobinario.com/wp-content/uploads/2023/12/patron_orchestration.svg)
+
+Nota. Obtenido de [IngenieroBinario, 2025](https://www.ingenierobinario.com/mulesoftarchitect83/)
 
 ### Ventajas frente a enfoques tradicionales:
 
@@ -63,6 +67,8 @@ RabbitMQ es especialmente útil para:
 
 ![Ejemplo de SAGA orquestada con AWS Step Functions](https://miro.medium.com/v2/resize:fit:1066/1*GzUTdCIiYkg10txO7K4LIw.png)
 
+Nota. Obtenido de [Medium, 2022](https://medium.com/aws-lambda-serverless-developer-guide-with-hands/saga-pattern-for-orchestrate-distributed-transactions-using-aws-step-functions-2513db0de84e)
+
 ## Casos de Aplicación
 
 ### 1. **Sector Financiero - Gestión de Pagos**
@@ -88,3 +94,17 @@ Una aplicación SaaS puede tener flujos donde se crea una cuenta, se genera una 
 En servicios como Uber o aplicaciones de entrega, se coordina el registro de la orden, asignación del conductor, validación del punto de recogida y confirmación de entrega. Si una parte falla (conductor cancela), se requiere compensar las anteriores (cancelar orden, devolver saldo).
 
 **Las sagas aseguran que la experiencia del cliente no se vea comprometida por fallos parciales.**
+
+---
+
+# Referencias
+
+Microservices Pattern: Pattern: Saga. (s. f.). microservices.io. Recuperado 11 de junio de 2025, de http://microservices.io/patterns/data/saga.html
+
+RobBagby. (s. f.). Saga Design Pattern—Azure Architecture Center. Recuperado 11 de junio de 2025, de https://learn.microsoft.com/en-us/azure/architecture/
+patterns/saga
+
+SAGA Design Pattern. (09:46:38+00:00). GeeksforGeeks. https://www.geeksforgeeks.org/saga-design-pattern/
+
+The pros and cons of the Saga architecture pattern. (s. f.). Recuperado 11 de junio de 2025, de https://www.redhat.com/en/blog/pros-and-cons-saga-architecture-pattern
+
