@@ -8,8 +8,6 @@ Nota. Obtenido de [GeeksForGeeks, s.f.](https://www.geeksforgeeks.org/saga-desig
 
 En arquitecturas basadas en microservicios, las transacciones distribuidas son un gran desafío. Tradicionalmente, una transacción se ejecuta de manera atómica, consistente, aislada y duradera (ACID), pero cuando una operación involucra múltiples servicios independientes, mantener estas propiedades se vuelve complejo.
 
-ibuidos\*\* sin depender de un gestor de transacciones centralizado, el cual no escala bien en ambientes cloud-native y desacoplados.
-
 La lista de problemas que aborda contiene, pero no se limita a:
 
 - **Falta de soporte para transacciones distribuidas ACID** entre microservicios.
