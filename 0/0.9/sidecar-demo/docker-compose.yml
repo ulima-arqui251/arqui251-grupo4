@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - users-logger
+      - products-logger
+
+  users-service:
+    build: ./user-service
+    expose:
+      - "5001"
+
+  users-logger:
+    build: ./user-logger
+    ports:
+      - "6001:6001"
+    volumes:
+      - ./logs:/logs
+    depends_on:
+      - users-service
+
+  products-service:
+    build: ./products-service
+    expose:
+      - "5002"
+
+  products-logger:
+    build: ./products-logger
+    ports:
+      - "6002:6002"
+    volumes:
+      - ./logs:/logs
+    depends_on:
+      - products-service
