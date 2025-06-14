@@ -56,9 +56,9 @@ Un servicio que procesa imágenes o videos puede apoyarse en un sidecar encargad
 
 ## Demo de código
 
-[![Repositorio con código fuente](./image/repo.png)](https://github.com/JesuFrancesco/arqsoft-lab-saga)
+[![Repositorio con código fuente](./image/repo_gg.png)](https://github.com/ulima-arqui251/arqui251-grupo4/tree/main/0/0.9/sidecar-demo)
 
-[Repositorio con código fuente](https://github.com/JesuFrancesco/arqsoft-lab-saga)
+[Repositorio con código fuente](https://github.com/ulima-arqui251/arqui251-grupo4/tree/main/0/0.9/sidecar-demo)
 
 ---
 
